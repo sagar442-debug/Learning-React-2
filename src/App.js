@@ -3,13 +3,24 @@ import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './App.css'
-import Pagination from 'react-bootstrap/Pagination';
+
+
 
 
 
 function App() {
-
+  const perPageItem = 5;
   const [todos, settodos] = useState([]);
+  const [page, setPage] = useState(1)
+
+  const handleShowMore = (type) => {
+    if (type === "prev") {
+      setPage((prevState) => prevState - 1)
+    } else {
+      setPage((prevState) => prevState + 1)
+
+    }
+  }
 
   useEffect(() => {
     axios
@@ -26,11 +37,11 @@ function App() {
   return (
     <div className="app">
       <div className="please">
-        {todos.slice(0, 10).map(todo => {
+        {todos.slice((page - 1) * perPageItem, perPageItem * page).map(todo => {
           return (
             <Card className="" style={{ width: '18rem' }}>
               <Card.Body>
-                <Card.Title>{todo.title}</Card.Title>
+                <Card.Title>{todo.id}</Card.Title>
                 <Card.Text>
                   {todo.body}
                 </Card.Text>
@@ -39,23 +50,15 @@ function App() {
             </Card>
           )
         })}
-        <Pagination>
-              <Pagination.First />
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Ellipsis />
 
-              <Pagination.Item>{10}</Pagination.Item>
-              <Pagination.Item>{11}</Pagination.Item>
-              <Pagination.Item active>{12}</Pagination.Item>
-              <Pagination.Item>{13}</Pagination.Item>
-              <Pagination.Item disabled>{14}</Pagination.Item>
+        <div style={{
+          marginTop: "20px",
+        }}>
+          <Button disabled={page === 1} onClick={()=>handleShowMore("prev")}>Prev</Button>
+          <Button disabled={page=== 20} onClick={()=>handleShowMore("next")}>Next</Button>
+        </div>
 
-              <Pagination.Ellipsis />
-              <Pagination.Item>{20}</Pagination.Item>
-              <Pagination.Next />
-              <Pagination.Last />
-            </Pagination>
+
       </div>
 
 
