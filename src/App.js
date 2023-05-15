@@ -1,42 +1,51 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+// import Button from 'react-bootstrap/Button';
+// import Card from 'react-bootstrap/Card';
+import { useSelector } from 'react-redux';
 import './App.css'
+import Comp1 from "./Component/Comp1";
 
 
 
 
 
 function App() {
-  const perPageItem = 5;
-  const [todos, settodos] = useState([]);
-  const [page, setPage] = useState(1)
+  const name = useSelector(state=> state.app.name)
+  // const perPageItem = 5;
+  // const [todos, settodos] = useState([]);
+  // const [page, setPage] = useState(1)
 
-  const handleShowMore = (type) => {
-    if (type === "prev") {
-      setPage((prevState) => prevState - 1)
-    } else {
-      setPage((prevState) => prevState + 1)
+  // const handleShowMore = (type) => {
+  //   if (type === "prev") {
+  //     setPage((prevState) => prevState - 1)
+  //   } else {
+  //     setPage((prevState) => prevState + 1)
 
-    }
-  }
+  //   }
+  // }
 
-  useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos/")
-      .then((success) => {
-        settodos(success.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonplaceholder.typicode.com/todos/")
+  //     .then((success) => {
+  //       settodos(success.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, []);
 
 
   return (
-    <div className="app">
-      <div className="please">
+    <div className="app" style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: '20px'
+    }}>
+      <p>{name}</p>
+      {/* <div className="please">
         {todos.slice((page - 1) * perPageItem, perPageItem * page).map(todo => {
           return (
             <Card className="" style={{ width: '18rem' }}>
@@ -59,9 +68,9 @@ function App() {
         </div>
 
 
-      </div>
+      </div> */}
 
-
+      <Comp1/>
 
     </div>
   );
