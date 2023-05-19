@@ -5,6 +5,7 @@
 import { useSelector } from 'react-redux';
 import './App.css'
 import Comp1 from "./Component/Comp1";
+import Comp3 from './Component/Comp3';
 
 
 
@@ -44,7 +45,7 @@ function App() {
       justifyContent: 'center',
       marginTop: '20px'
     }}>
-      <p>{name}</p>
+      {/* <p>{name}</p> */}
       {/* <div className="please">
         {todos.slice((page - 1) * perPageItem, perPageItem * page).map(todo => {
           return (
@@ -70,7 +71,7 @@ function App() {
 
       </div> */}
 
-      <Comp1/>
+      <Comp3/>
 
     </div>
   );

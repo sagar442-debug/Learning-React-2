@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeName } from '../redux/appSlice'
+// import { changeName } from '../redux/appSlice'
+import AppContext from '../context/AppContext'
 
 const Comp2 = () => {
     const name = useSelector(state => state.app.name)
     
     const dispatch = useDispatch();
+    const data = useContext(AppContext)
+   
   return (
     <div>
-        <button onClick={()=> dispatch(changeName())}> Change Name</button>
-      <p>My name is {name}</p>
+      <p>hello {data.name}</p>
     </div>
+        
+    
   )
 }
 
